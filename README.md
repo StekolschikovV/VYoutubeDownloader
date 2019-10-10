@@ -1,4 +1,4 @@
-#Introduction
+# Introduction
 
 Program for downloading videos from YouTube.
 
@@ -8,7 +8,7 @@ Supports downloading:
 * video
 
 
-#Getting Started
+# Getting Started
 
 To continue development
 
@@ -20,3 +20,8 @@ npm start
 ```
 
 To use, take the latest versions from the release folder.
+
+* [Linux](https://raw.githubusercontent.com/StekolschikovV/VYoutubeDownloader/master/release/VYD.AppImage)
+* [Windows](https://raw.githubusercontent.com/StekolschikovV/VYoutubeDownloader/master/release/VYD.exe)
+
+
