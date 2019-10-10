@@ -1,0 +1,104 @@
+<!-- <router-outlet></router-outlet> -->
+<div class="container-fluid" id="top-panel">
+  <div class="row">
+    <div class="col-12 p-0">
+      <nav class="navbar navbar-dark p-0">
+        <input [(ngModel)]="searchUrl" class="form-control form-control-dark w-100 rounded-0" type="text"
+               placeholder="Search" aria-label="Search" (keydown)="keyDownFunction($event)">
+        <ul class="navbar-nav text-center">
+          <li class="nav-item text-nowrap">
+            <a class="nav-link" href="#" *ngIf="!store.isInfoLoadNow.value" (click)="search()">
+              Search
+            </a>
+            <a class="nav-link text-center" href="#" *ngIf="store.isInfoLoadNow.value">
+              <fa name="cog" animation="spin"></fa>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 path text-warning">
+      Save to: <span class="font-italic" (click)="openFileDialog()">{{ store.path.value }}</span>
+      <input id="business" type="file" webkitdirectory directory style="display: none"
+             (change)="setUserAppPath($event)"/>
+    </div>
+  </div>
+</div>
+
+<div id="video-list" class="container-fluid bg-light">
+  <div class="row">
+    <div class="col-12 video" *ngFor="let el of store.video.getValue()" (click)="selectVideo(el)"
+         [ngClass]="{'bg-warning': el.isStartLoaded === true && !el.isLoaded, 'bg-success': el.isLoaded === true}">
+      <div class="isSelected">
+        <fa name="square" *ngIf="!el.isSelected"></fa>
+        <fa name="check-square" *ngIf="el.isSelected"></fa>
+      </div>
+      <div class="img-container text-center">
+        <div class="img" [style.backgroundImage]="'url('+ el.thumbnail +')'">
+          <div class="duration">
+            {{ el.duration }}
+          </div>
+        </div>
+      </div>
+      <div class="content">
+        <div class="title">{{ el.title }}</div>
+        <div class="description">{{ el.description }}</div>
+        <div class="control-group">
+          <select (change)="selectFormat($event.target.value, el)" class="custom-select">
+            <option *ngFor="let format of el.formats" value="{{format.format_id}}"
+                  [selected]="el.selectedFormat.format_id === format.format_id">{{format.format}}</option>
+          </select>
+          <button (click)="this.searchUrl = el.channelUrl; search()" >get channel</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 video d-flex justify-content-center" *ngFor="let el of store.videoShadow.getValue()">
+      <div class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row video-empty" *ngIf="store.video.getValue().length === 0 && store.videoShadow.getValue().length === 0">
+    <div class="col-12">
+      The list of videos is empty. Type in a search link to a video, playlist or channel and click on the search button.
+    </div>
+  </div>
+
+</div>
+
+
+<div id="bottom-panel" class="container-fluid">
+  <div class="row">
+    <div class="col-1 text-left">
+      <div class="isOnline"
+           [ngClass]="{'green': store.isOnline.getValue() === true, 'red': store.isOnline.getValue()  === false }"></div>
+    </div>
+    <div class="col-11 text-right d-none d-sm-block" *ngIf="store.video.getValue().length > 0">
+      <button class="btn btn-outline-primary" (click)="selectAll()" *ngIf="!store.isDownloadLoadNow.getValue()">
+        Select/deselect all
+      </button>
+      <button class="btn btn-outline-success" (click)="downloadSelected()" *ngIf="!store.isDownloadLoadNow.getValue()">
+        Download selected
+      </button>
+      <button type="button" class="btn btn-outline-danger" (click)="downloadStop()"
+              *ngIf="store.isDownloadLoadNow.getValue()">Stop
+      </button>
+      <button type="button" class="btn btn-outline-danger" (click)="searchStop()" *ngIf="store.isInfoLoadNow.value">Stop
+        searching
+      </button>
+      <button type="button" class="btn btn-outline-danger" (click)="rmSelected()" *ngIf="store.selectedCount.value > 0">
+        Remove selected
+      </button>
+    </div>
+    <div class="col-11 text-right  d-none d-sm-block" *ngIf="store.video.getValue().length === 0">
+      <button type="button" class="btn btn-outline-danger" (click)="searchStop()" *ngIf="store.isInfoLoadNow.value">Stop
+        searching
+      </button>
+    </div>
+  </div>
+</div>

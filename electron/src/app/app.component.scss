@@ -1,0 +1,214 @@
+$padding: 10px;
+$whiteColor: #f8f9fa;
+$greyColor: #495057;
+$lightGreyColor: #494e54;
+$darkGreyColor: #343a40;
+$superDarkGreyColor: darken($darkGreyColor, 5%);
+
+:host {
+  #video-list {
+    min-height: calc(100vh - 121px);
+    max-height: calc(100vh - 121px);
+    overflow-y: auto;
+    max-width: 100vw;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    overflow-x: hidden;
+    &::-webkit-scrollbar {
+      width: 5px;
+    }
+    &::-webkit-scrollbar-track {
+      background: #ddd;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: #666;
+    }
+    .video-empty {
+      min-height: calc(100vh - 124px);
+      max-height: calc(100vh - 124px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: $greyColor;
+    }
+    .video {
+      cursor: pointer;
+      background: $lightGreyColor;
+      margin-bottom: 1px;
+      margin-top: 1px;
+      padding-bottom: $padding;
+      padding-top: $padding;
+      color: $whiteColor;
+      position: relative;
+      height: 120px;
+      display: flex;
+      justify-content: space-between;
+      flex-direction: row;
+      .control-group {
+        display:flex;
+        button {
+          margin-left: $padding;
+          border: 0;
+          background: none;
+          outline: none !important;
+          margin-top: 5px;
+        }
+      }
+      .spinner-border {
+        margin-top: 35px;
+      }
+      .custom-select {
+        display: block;
+        width: auto;
+        margin-top: 8px;
+      }
+      .controls {
+        position: absolute;
+        top: 0;
+        right: $padding;
+        z-index: 9;
+        fa {
+          margin-left: $padding;
+        }
+      }
+      .content{
+        width: calc(100vw - 250px);
+      }
+      .img-container {
+        //padding-right: 0;
+        //padding-left: $padding;
+        //height: 100%;
+        //background: red;
+        //background-image: url("");
+        padding: 0;
+        max-width: 150px;
+        min-width: 150px;
+        .img {
+          background-size: cover;
+          background-position: center;
+          height: 100px;
+          width: 100%;
+          background-repeat: no-repeat;
+          .duration {
+            height: 100%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            background: rgba(33, 37, 41, 0.4588235294117647);
+          }
+        }
+        //img {
+        //  height: 80px;
+        //  max-width: 100%;
+        //}
+      }
+      .isSelected {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        min-width: 40px;
+        max-width: 40px;
+      }
+      .title {
+        //margin-top: $padding;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        width: 100%;
+        height: 30px;
+        white-space: nowrap;
+        font-size: 18px;
+      }
+      .description {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        width: 100%;
+        height: 15px;
+        white-space: nowrap;
+        font-size: 12px;
+      }
+      &:hover {
+        background: $darkGreyColor;
+      }
+    }
+  }
+
+  #bottom-panel {
+    background-color: $superDarkGreyColor !important;
+    overflow: hidden;
+    .row {
+      //background: red;
+      padding: $padding;
+      height: 58px;
+      .btn {
+        margin-left: 10px;
+        margin-bottom: 20px;
+      }
+      .isOnline {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        display: block;
+        margin-top: 15px;
+      }
+      .green {
+        background: green;
+      }
+      .red {
+        background: red;
+      }
+    }
+
+  }
+  #top-panel {
+    nav {
+      display: flex !important;
+      flex-wrap: nowrap;
+      ul {
+        background-color: $darkGreyColor;
+        border: 0;
+        overflow: hidden;
+        padding: 0;
+        height: 37px;
+        width: 78px;
+        &:hover {
+          background-color: $superDarkGreyColor;
+        }
+      }
+    }
+    background: $superDarkGreyColor;
+    input {
+      background: $lightGreyColor;
+      border: 0;
+      color: $whiteColor;
+      &:focus {
+        background: $whiteColor;
+        color: $lightGreyColor !important;
+      }
+    }
+    .path {
+      padding: 0 $padding;
+      span {
+        cursor: pointer;
+        text-decoration: underline;
+      }
+      text-overflow: ellipsis;
+      overflow: hidden;
+      width: 100%;
+      height: 25px;
+      white-space: nowrap;
+      font-size: 14px;
+    }
+  }
+}
+
+//@media (max-width: 600px) {
+//  :host {
+//    #video-list {
+//      .video {
+//        background: red;
+//      }
+//    }
+//  }
+//}
